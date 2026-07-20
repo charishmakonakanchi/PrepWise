@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Welcome to PrepWise</h1>
+
+<p>Practice smarter, not harder.</p>
+
+{% if current_user.is_authenticated %}
+
+<p>Welcome, {{ current_user.username }}!</p>
+
+<a href="{{ url_for('questions.questions') }}">
+    Go to Question Bank
+</a>
+
+{% else %}
+
+<p>Please login or register to start practicing.</p>
+
+{% endif %}
+
+{% endblock %}

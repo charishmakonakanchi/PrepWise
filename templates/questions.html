@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Questions</title>
+</head>
+<body>
+
+<h1>Interview Questions</h1>
+
+{% if questions %}
+
+    {% for question in questions %}
+
+        <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+
+            <h3>{{ question.title }}</h3>
+
+            <p>Category: {{ question.category }}</p>
+
+            <p>Difficulty: {{ question.difficulty }}</p>
+
+            <a href="/questions/{{ question.id }}">View Details</a>
+
+        </div>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>No questions available.</p>
+
+{% endif %}
+
+</body>
+</html>

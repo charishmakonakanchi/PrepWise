@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_login import current_user
+from flask import Flask, render_template
 
 from config import Config
 from extensions import db, login_manager
@@ -29,37 +29,18 @@ def load_user(user_id):
 
 # Authentication routes
 from routes.auth import auth
+from routes.questions import questions_bp
 
 app.register_blueprint(auth)
+app.register_blueprint(questions_bp)
 
 
 
-from flask_login import current_user
+from flask import render_template
 
 @app.route("/")
 def home():
-
-    if current_user.is_authenticated:
-
-        return f"""
-        <h1>Welcome, {current_user.username}!</h1>
-
-        <p>You are successfully logged in.</p>
-
-        <br>
-
-        <a href="/logout">Logout</a>
-        """
-
-    return """
-    <h1>Welcome to PrepWise</h1>
-
-    <a href="/register">Register</a>
-
-    <br><br>
-
-    <a href="/login">Login</a>
-    """
+    return render_template("index.html")
 
 
 
