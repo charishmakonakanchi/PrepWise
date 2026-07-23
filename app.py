@@ -30,9 +30,11 @@ def load_user(user_id):
 # Authentication routes
 from routes.auth import auth
 from routes.questions import questions_bp
+from routes.dashboard import dashboard_bp
 
 app.register_blueprint(auth)
 app.register_blueprint(questions_bp)
+app.register_blueprint(dashboard_bp)
 
 
 

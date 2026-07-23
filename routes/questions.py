@@ -31,6 +31,32 @@ def question_detail(question_id):
     )
 
 
+# ⭐ ADD THIS NEW ROUTE HERE
+@questions_bp.route("/add-question", methods=["GET", "POST"])
+@login_required
+def add_question():
+
+    if request.method == "POST":
+
+        question = Question(
+            title=request.form["title"],
+            description=request.form["description"],
+            category=request.form["category"],
+            difficulty=request.form["difficulty"],
+            company=request.form["company"],
+            solution=request.form["solution"]
+        )
+
+        db.session.add(question)
+        db.session.commit()
+
+        return redirect(
+            url_for("questions.questions")
+        )
+
+    return render_template("add_question.html")
+
+
 @questions_bp.route("/bookmark/<int:question_id>")
 @login_required
 def bookmark_question(question_id):
