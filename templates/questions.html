@@ -1,25 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Questions</title>
+    <title>Question Bank</title>
 </head>
 <body>
 
 <h1>Interview Questions</h1>
 
+<!-- Search Form -->
+<form method="GET" action="{{ url_for('questions.questions') }}">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search questions..."
+        value="{{ search }}"
+    >
+
+    <button type="submit">
+        Search
+    </button>
+
+    <a href="{{ url_for('questions.questions') }}">
+        Clear
+    </a>
+
+</form>
+
+<hr>
+
 {% if questions %}
 
     {% for question in questions %}
 
-        <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+        <div style="border:1px solid #ccc; padding:15px; margin:15px;">
 
             <h3>{{ question.title }}</h3>
 
-            <p>Category: {{ question.category }}</p>
+            <p><strong>Category:</strong> {{ question.category }}</p>
 
-            <p>Difficulty: {{ question.difficulty }}</p>
+            <p><strong>Difficulty:</strong> {{ question.difficulty }}</p>
 
-            <a href="/questions/{{ question.id }}">View Details</a>
+            <p><strong>Company:</strong> {{ question.company }}</p>
+
+            <a href="{{ url_for('questions.question_detail', question_id=question.id) }}">
+                View Details
+            </a>
 
         </div>
 
@@ -27,7 +53,7 @@
 
 {% else %}
 
-    <p>No questions available.</p>
+    <h3>No matching questions found.</h3>
 
 {% endif %}
 

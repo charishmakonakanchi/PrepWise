@@ -12,11 +12,22 @@ questions_bp = Blueprint("questions", __name__)
 @questions_bp.route("/questions")
 def questions():
 
-    questions = Question.query.all()
+    search = request.args.get("search", "")
+
+    if search:
+
+        questions = Question.query.filter(
+            Question.title.ilike(f"%{search}%")
+        ).all()
+
+    else:
+
+        questions = Question.query.all()
 
     return render_template(
         "questions.html",
-        questions=questions
+        questions=questions,
+        search=search
     )
 
 
