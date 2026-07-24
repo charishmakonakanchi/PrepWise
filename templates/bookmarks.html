@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}My Bookmarks{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2>⭐ My Bookmarked Questions</h2>
+
+    <hr>
+
+    {% if bookmarks %}
+
+        {% for bookmark in bookmarks %}
+
+        <div class="card mb-3 shadow-sm">
+
+            <div class="card-body">
+
+                <h4>{{ bookmark.question.title }}</h4>
+
+                <p>
+                    <strong>Category:</strong>
+                    {{ bookmark.question.category }}
+                </p>
+
+                <p>
+                    <strong>Difficulty:</strong>
+                    {{ bookmark.question.difficulty }}
+                </p>
+
+                <a href="{{ url_for('questions.question_detail',
+                                    question_id=bookmark.question.id) }}"
+                   class="btn btn-primary">
+                    View Question
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="alert alert-info">
+            You haven't bookmarked any questions yet.
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

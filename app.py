@@ -31,10 +31,12 @@ def load_user(user_id):
 from routes.auth import auth
 from routes.questions import questions_bp
 from routes.dashboard import dashboard_bp
+from routes.bookmarks import bookmarks_bp
 
 app.register_blueprint(auth)
 app.register_blueprint(questions_bp)
 app.register_blueprint(dashboard_bp)
+app.register_blueprint(bookmarks_bp)
 
 
 
